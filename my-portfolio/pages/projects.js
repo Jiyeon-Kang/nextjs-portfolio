@@ -1,4 +1,4 @@
-import Layout from "@/componenets/layout";
+import Layout from "@/components/layout";
 
 export default function Projects() {
     return (
