@@ -1,3 +1,8 @@
+"use client"
+
+import Lottie from 'react-lottie-player'
+import lottieJson from '../../../public/Animation.json'
+
 export default function Hero() {
     return (
         <>
@@ -15,6 +20,9 @@ export default function Hero() {
                         Projects
                     </button>
                 </div>
+            </div>
+            <div>
+                <Lottie loop animationData={lottieJson} play />
             </div>
             <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
             </div>
