@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
-import Hero from "@/app/components/home/hero";
+import dynamic from 'next/dynamic';
+const Hero = dynamic(() => import('@/app/components/home/hero'), { ssr: false });
 
 export default function Home() {
     return (
