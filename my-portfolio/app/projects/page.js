@@ -1,9 +1,13 @@
 import Image from "next/image";
+import Header from "@/app/components/header";
+import Hero from "@/app/components/home/hero";
+import Footer from "@/app/components/footer";
 
 export default function Projects() {
     return (
         <>
-            <h1>Projects</h1>
+            <Header/>
+            <Footer/>
         </>
     );
 }
