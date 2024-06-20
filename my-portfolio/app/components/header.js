@@ -1,6 +1,13 @@
+"use client";
+
+import React from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from "next/link";
+import Modal from "@/app/components/email"
 
 export default function Header() {
+    const searchParams = useSearchParams();
+    const show = searchParams.get('show');
     return (
         <header className="text-gray-600 body-font">
             <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -22,10 +29,10 @@ export default function Header() {
                         Projects
                     </Link>
 
-                    <Link href="/contact" className="mr-5 hover:text-gray-900">
+                    <Link href="/?show=true" className="mr-5 hover:text-gray-900">
                         Contact
                     </Link>
-                    <a className="mr-5 hover:text-gray-900">Contact</a>
+                    {show && <Modal />}
                 </nav>
                 <button
                     className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Button
