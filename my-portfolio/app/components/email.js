@@ -9,7 +9,8 @@ export default function Modal() {
                 <div className="text-center">
                     <h3 className="text-2xl font-bold text-gray-900">Contact</h3>
                     <div className="mt-2 px-7 py-3">
-                        <a href="mailto:info@mailgo.dev" className="text-lg text-gray-500 hover:underline hover:text-blue-400">kang158632@gmail.com</a>
+                        <a href="mailto:info@mailgo.dev"
+                           className="text-lg text-gray-500 hover:underline hover:text-blue-400">kang158632@gmail.com</a>
                     </div>
                     <div className="flex justify-center mt-4">
 
