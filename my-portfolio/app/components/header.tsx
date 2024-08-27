@@ -3,7 +3,7 @@
 import React from 'react';
 import {useSearchParams} from 'next/navigation';
 import Link from "next/link";
-import Modal from "@/app/components/email"
+import Modal from "./email"
 import DarkModeToggleButton from "./dark-mode-toggle-button"
 
 export default function Header() {

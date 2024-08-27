@@ -1,24 +1,22 @@
-'use client'
+'use client';
 
-import {useEffect, useRef} from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import animationData from '../../../public/Animation.json';
-import Lottie from 'lottie-web'; // Ensure this import is correct
+import Lottie from 'lottie-web';
 
 export default function Hero() {
-    const animationContainer = useRef(null);
+    const animationContainer = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        // Load animation when component mounts
         const anim = Lottie.loadAnimation({
-            container: animationContainer.current,
+            container: animationContainer.current as HTMLDivElement,
             renderer: 'svg',
             loop: true,
             autoplay: true,
             animationData: animationData,
         });
 
-        // Clean up animation when component unmounts
         return () => {
             anim.destroy();
         };

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import "../styles/globals.css";
 
 export default function Modal() {
 
@@ -13,8 +14,6 @@ export default function Modal() {
                            className="text-lg text-gray-500 hover:underline hover:text-blue-400">kang158632@gmail.com</a>
                     </div>
                     <div className="flex justify-center mt-4">
-
-                        {/* Navigates back to the base URL - closing the modal */}
                         <Link
                             href="/"
                             className="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"

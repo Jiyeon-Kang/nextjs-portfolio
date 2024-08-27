@@ -1,3 +1,8 @@
+const {
+    iconsPlugin,
+    getIconCollections,
+} = require("@egoist/tailwindcss-icons");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
@@ -15,5 +20,7 @@ module.exports = {
         },
     },
     darkMode: 'class',
-    plugins: [],
+    plugins: [  iconsPlugin({
+        collections: getIconCollections(["tabler", "lucide"]),
+    }),],
 };
