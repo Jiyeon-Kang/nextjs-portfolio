@@ -32,9 +32,12 @@
   "include": [
     "my-portfolio/**/*.ts",
     "my-portfolio/**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/**/*",
+    "components/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "build"
   ]
 }
