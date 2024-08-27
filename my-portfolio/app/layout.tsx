@@ -1,6 +1,6 @@
 import {Inter} from "next/font/google";
 import {ThemeProvider} from 'next-themes'
-import "./globals.css";
+import "../app/styles/globals.css";
 
 export const metadata = {
     title: "Jiyeon's Portfolio",
@@ -14,11 +14,8 @@ export default function RootLayout({
     children
 }: any) {
     return (
-        // @ts-expect-error TS(2304): Cannot find name 'html'.
         <html suppressHydrationWarning lang="en">
-        // @ts-expect-error TS(2304): Cannot find name 'body'.
         <body className={inter.className} suppressHydrationWarning={true}>
-        // @ts-expect-error TS(2749): 'ThemeProvider' refers to a value, but is being us... Remove this comment to see the full error message
         <ThemeProvider attribute={"class"}>{children}</ThemeProvider>
         </body>
         </html>

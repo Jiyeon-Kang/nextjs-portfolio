@@ -3,14 +3,12 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import animationData from '../../../public/Animation.json';
-import Lottie from 'lottie-web'; // Ensure this import is correct
+import Lottie from 'lottie-web';
 
 export default function Hero() {
-    // Define the type of the animation container reference
     const animationContainer = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        // Load animation when component mounts
         const anim = Lottie.loadAnimation({
             container: animationContainer.current as HTMLDivElement,
             renderer: 'svg',
@@ -19,7 +17,6 @@ export default function Hero() {
             animationData: animationData,
         });
 
-        // Clean up animation when component unmounts
         return () => {
             anim.destroy();
         };
