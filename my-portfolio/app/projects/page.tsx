@@ -1,13 +1,31 @@
-import Image from "next/image";
 import Header from "../components/header";
-import Hero from "../components/home/hero";
 import Footer from "../components/footer";
+import { notionDatabase } from 'lib/notion';
 
-export default function Projects() {
+export default async function Projects() {
+    let db;
+
+    try {
+        if (!process.env.NOTION_DATABASE_ID) {
+            throw new Error('No database Id');
+        }
+        db = await notionDatabase.databases.query({
+            database_id: process.env.NOTION_DATABASE_ID,
+        });
+        console.log('Notion API Response:', db);
+
+    } catch (error) {
+        console.error('Error fetching data from Notion:', error);
+        return <main>Error</main>;
+    }
+
     return (
         <>
-            <Header/>
-            <Footer/>
+            <Header />
+            <main>
+                <pre>{JSON.stringify(db, null, 2)}</pre>
+            </main>
+            <Footer />
         </>
     );
 }
