@@ -25,6 +25,10 @@ interface NotionPage {
             type: 'title';
             title: { plain_text: string }[];
         };
+        Participating: {
+            type: 'rich_text';
+            rich_text: { plain_text: string }[];
+        };
     };
     url: string;
 }
@@ -37,6 +41,7 @@ interface ProjectData {
         startDate: string;
         endDate: string;
     };
+    participating:number;
 }
 
 export default async function Projects() {
@@ -59,12 +64,15 @@ export default async function Projects() {
                 startDate: item.properties.WorkPeriod.date.start,
                 endDate: item.properties.WorkPeriod.date.end
             };
+            const participatingText = item.properties['Participating'].rich_text.map(text => text.plain_text).join('');
+            const participating = parseInt(participatingText, 10) || 0;
 
             return {
                 title,
                 description,
                 tags,
-                workPeriod
+                workPeriod,
+                participating
             };
         });
 
@@ -87,6 +95,7 @@ export default async function Projects() {
                                 description={item.description}
                                 tags={item.tags}
                                 workPeriod={item.workPeriod}
+                                participating={item.participating}
                             />
                         </div>
                     ))
