@@ -96,24 +96,28 @@ export default async function Projects() {
     return (
         <>
             <Header/>
-            <main>
-                {projectData.length > 0 ? (
-                    projectData.map((item, index) => (
-                        <div key={index}>
-                            <ProjectItem
-                                coverImage={item.coverImage}
-                                title={item.title}
-                                description={item.description}
-                                tags={item.tags}
-                                workPeriod={item.workPeriod}
-                                participating={item.participating}
-                            />
-                        </div>
-                    ))
-                ) : (
-                    <p>No data found</p>
-                )}
-            </main>
+            <div className="flex flex-col items-center justify-center min-h-screen px-5 mb-10 px-6">
+                <main>
+                    <div className="grid grid-cols-1 md:grid-cols-2 py-10 m-6 gap-8 w-full">
+                        {projectData.length > 0 ? (
+                            projectData.map((item, index) => (
+                                <div key={index}>
+                                    <ProjectItem
+                                        coverImage={item.coverImage}
+                                        title={item.title}
+                                        description={item.description}
+                                        tags={item.tags}
+                                        workPeriod={item.workPeriod}
+                                        participating={item.participating}
+                                    />
+                                </div>
+                            ))
+                        ) : (
+                            <p>No data found</p>
+                        )}
+                    </div>
+                </main>
+            </div>
             <Footer/>
         </>
     );

@@ -7,21 +7,33 @@ interface ProjectItemProps {
         startDate: string;
         endDate: string;
     };
-    participating:number;
+    participating: number;
     coverImage: string | null;
 }
 
-const ProjectItem: React.FC<ProjectItemProps> = ({title, description, tags, workPeriod, participating,coverImage}) => {
+const ProjectItem: React.FC<ProjectItemProps> = ({title, description, tags, workPeriod, participating, coverImage}) => {
     return (
-        <div className="flex flex-col p-6 bg-slate-400 rounded-md my-5">
+        <div className="project-card">
             {coverImage && (
-                <img src={coverImage} alt={`${title} cover`} className="w-full h-auto rounded-md mb-4" />
-                )}
-            <h1>{title}</h1>
-            <p>Description: <a href={description} target="_blank" rel="noopener noreferrer">{description}</a></p>
-            <p>Tags: {tags.join(', ')}</p>
-            <p>Work Period: {workPeriod.startDate} - {workPeriod.endDate}</p>
-            <p>Participating: {participating}</p>
+                <img src={coverImage} alt={`${title} cover`}
+                     className="w-full rounded-md mb-4 rounded-t-xl h-1/2 object-cover"/>
+            )}
+            <div className="flex flex-col p-4">
+                <h1>{title}</h1>
+                <p>Description: <a className="hover:underline hover:text-blue-400" href={description} target="_blank" rel="noopener noreferrer">{description}</a></p>
+                <p>Tags:
+                    {tags.map((tag, index) => (
+                        <span
+                            key={index}
+                            className="inline-block px-2 py-1 mr-2 mb-1 rounded-md bg-sky-200 dark:bg-sky-700"
+                        >
+                            {tag}
+                        </span>
+                    ))}
+                </p>
+                <p>Work Period: {workPeriod.startDate} - {workPeriod.endDate}</p>
+                <p>Participating: {participating}</p>
+            </div>
         </div>
     );
 };
