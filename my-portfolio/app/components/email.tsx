@@ -6,9 +6,9 @@ export default function Modal() {
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center ㅋ
         z-10">
-            <div className="p-8 border w-96 shadow-lg rounded-md bg-white">
+            <div className="p-8 border w-96 shadow-lg rounded-md bg-white dark:bg-slate-800">
                 <div className="text-center">
-                    <h3 className="text-2xl font-bold text-gray-900">Contact</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Contact</h3>
                     <div className="mt-2 px-7 py-3">
                         <a href="mailto:info@mailgo.dev"
                            className="text-lg text-gray-500 hover:underline hover:text-blue-400">kang158632@gmail.com</a>
@@ -20,7 +20,6 @@ export default function Modal() {
                         >
                             Close
                         </Link>
-
                     </div>
                 </div>
             </div>
