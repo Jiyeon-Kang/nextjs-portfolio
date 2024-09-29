@@ -1,4 +1,5 @@
 // pages/projects.tsx
+import Image from 'next/image';
 import Header from "../components/header";
 import Footer from "../components/footer";
 import {notionDatabase} from 'lib/notion';
@@ -29,6 +30,12 @@ interface NotionPage {
             type: 'rich_text';
             rich_text: { plain_text: string }[];
         };
+        cover: {
+            type: 'external';
+            external: {
+                url: string;
+            };
+        } | null;
     };
     url: string;
 }
@@ -42,6 +49,7 @@ interface ProjectData {
         endDate: string;
     };
     participating:number;
+    coverImage: string | null;
 }
 
 export default async function Projects() {
@@ -66,13 +74,15 @@ export default async function Projects() {
             };
             const participatingText = item.properties['Participating'].rich_text.map(text => text.plain_text).join('');
             const participating = parseInt(participatingText, 10) || 0;
+            const coverImage = item.cover ? item.cover.external.url : null;
 
             return {
                 title,
                 description,
                 tags,
                 workPeriod,
-                participating
+                participating,
+                coverImage
             };
         });
 
@@ -91,6 +101,7 @@ export default async function Projects() {
                     projectData.map((item, index) => (
                         <div key={index}>
                             <ProjectItem
+                                coverImage={item.coverImage}
                                 title={item.title}
                                 description={item.description}
                                 tags={item.tags}
