@@ -1,4 +1,6 @@
 // components/projects/projects-item.tsx
+import Image from 'next/image';
+
 interface ProjectItemProps {
     title: string;
     description: string;
@@ -14,9 +16,20 @@ interface ProjectItemProps {
 const ProjectItem: React.FC<ProjectItemProps> = ({title, description, tags, workPeriod, participating, coverImage}) => {
     return (
         <div className="project-card">
-            {coverImage && (
-                <img src={coverImage} alt={`${title} cover`}
-                     className="w-full rounded-md mb-4 rounded-t-xl h-1/2 object-cover"/>
+            {coverImage ? (
+                <Image
+                    src={coverImage}
+                    alt={`${title} cover`}
+                    className="w-full rounded-md mb-4 rounded-t-xl"
+                    layout="responsive"
+                    width={500}
+                    height={300}
+                    objectFit="cover"
+                />
+            ) : (
+                <div className="w-full h-64 bg-gray-300 rounded-md mb-4 rounded-t-xl flex items-center justify-center">
+                    <span>No Image Available</span>
+                </div>
             )}
             <div className="flex flex-col p-4">
                 <h1>{title}</h1>

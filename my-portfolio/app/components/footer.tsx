@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link";
+import { SVGProps } from 'react';
 
 export default function Footer(props: SVGProps<SVGSVGElement>) {
     return (
