@@ -31,9 +31,7 @@ export default function Hero() {
                     <br className="hidden lg:inline-block"/>I am Jiyeon
                 </h1>
                 <p className="mb-8 leading-relaxed">
-                    Copper mug try-hard pitchfork pour-over freegan heirloom
-                    neutra air plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag
-                    selvage hot chicken authentic tumeric truffaut hexagon try-hard chambray.
+                    I'm always up for trying new things with the mindset that effort never betray me
                 </p>
                 <div className="flex justify-center">
                     <Link href="/projects" className="mr-5 hover:text-gray-900">
