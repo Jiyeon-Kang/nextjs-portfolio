@@ -1,4 +1,3 @@
-// components/projects/projects-item.tsx
 import Image from 'next/image';
 
 interface ProjectItemProps {
@@ -10,27 +9,23 @@ interface ProjectItemProps {
         endDate: string;
     };
     participating: number;
-    coverImage: string | null;
+    coverImage: string;
 }
 
-const ProjectItem: React.FC<ProjectItemProps> = ({title, description, tags, workPeriod, participating, coverImage}) => {
+const ProjectItem: React.FC<ProjectItemProps> = ({ title, description, tags, workPeriod, participating, coverImage }) => {
+    const displayImage = coverImage || '/images/no-image-available.png';
+
     return (
         <div className="project-card">
-            {coverImage ? (
-                <Image
-                    src={coverImage}
-                    alt={`${title} cover`}
-                    className="w-full rounded-md mb-4 rounded-t-xl"
-                    layout="responsive"
-                    width={500}
-                    height={300}
-                    objectFit="cover"
-                />
-            ) : (
-                <div className="w-full h-64 bg-gray-300 rounded-md mb-4 rounded-t-xl flex items-center justify-center">
-                    <span>No Image Available</span>
-                </div>
-            )}
+            <Image
+                src={displayImage}
+                alt={`${title} cover`}
+                className="w-full rounded-md mb-4 rounded-t-xl"
+                layout="responsive"
+                width={500}
+                height={300}
+                objectFit="cover"
+            />
             <div className="flex flex-col p-4">
                 <h1>{title}</h1>
                 <p>Description: <a className="hover:underline hover:text-blue-400" href={description} target="_blank" rel="noopener noreferrer">{description}</a></p>

@@ -1,44 +1,9 @@
-// pages/projects.tsx
 import Image from 'next/image';
 import Header from "../components/header";
 import Footer from "../components/footer";
-import {notionDatabase} from 'lib/notion';
+import { notionDatabase } from 'lib/notion';
 import ProjectItem from "../components/projects/projects-item";
-
-interface NotionPage {
-    properties: {
-        Description: {
-            type: 'url';
-            url: string;
-        };
-        Tags: {
-            type: 'multi_select';
-            multi_select: { name: string }[];
-        };
-        WorkPeriod: {
-            type: 'date';
-            date: {
-                start: string;
-                end: string;
-            };
-        };
-        name: {
-            type: 'title';
-            title: { plain_text: string }[];
-        };
-        Participating: {
-            type: 'rich_text';
-            rich_text: { plain_text: string }[];
-        };
-        cover: {
-            type: 'external';
-            external: {
-                url: string;
-            };
-        } | null;
-    };
-    url: string;
-}
+import { PageObjectResponse, PartialDatabaseObjectResponse, DatabaseObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 interface ProjectData {
     title: string;
@@ -48,8 +13,8 @@ interface ProjectData {
         startDate: string;
         endDate: string;
     };
-    participating:number;
-    coverImage: string | null;
+    participating: number;
+    coverImage: string;
 }
 
 export default async function Projects() {
@@ -64,28 +29,36 @@ export default async function Projects() {
             database_id: process.env.NOTION_DATABASE_ID,
         });
 
-        projectData = db.results.map((item: NotionPage) => {
-            const title = item.properties.name.title.map(text => text.plain_text).join(' ');
-            const description = item.properties.Description.url;
-            const tags = item.properties.Tags.multi_select.map(tag => tag.name);
-            const workPeriod = {
-                startDate: item.properties.WorkPeriod.date.start,
-                endDate: item.properties.WorkPeriod.date.end
-            };
-            const participatingText = item.properties['Participating'].rich_text.map(text => text.plain_text).join('');
-            const participating = parseInt(participatingText, 10) || 0;
-            const coverImage = item.cover ? item.cover.external.url : null;
+        projectData = db.results
+            .map((item): ProjectData | null => {
+                if ('properties' in item && item.object === 'page') {
+                    const properties = item.properties as Record<string, any>;
 
-            return {
-                title,
-                description,
-                tags,
-                workPeriod,
-                participating,
-                coverImage
-            };
-        });
+                    const title = properties.name?.title?.map((text: { plain_text: string }) => text.plain_text).join(' ') || 'Untitled';
+                    const description = properties.Description?.url || '';
+                    const tags = properties.Tags?.multi_select?.map((tag: { name: string }) => tag.name) || [];
+                    const workPeriod = {
+                        startDate: properties.WorkPeriod?.date?.start || '',
+                        endDate: properties.WorkPeriod?.date?.end || ''
+                    };
+                    const participatingText = properties.Participating?.rich_text?.map((text: { plain_text: string }) => text.plain_text).join('') || '';
+                    const participating = parseInt(participatingText, 10) || 0;
 
+                    const coverImage = item.cover?.type === 'external' ? item.cover.external.url : '';
+
+                    return {
+                        title,
+                        description,
+                        tags,
+                        workPeriod,
+                        participating,
+                        coverImage,
+                    };
+                }
+
+                return null;
+            })
+            .filter((item): item is ProjectData => item !== null);
         console.log('Extracted project data:', projectData);
 
     } catch (error) {
@@ -95,7 +68,7 @@ export default async function Projects() {
 
     return (
         <>
-            <Header/>
+            <Header />
             <div className="flex flex-col items-center justify-center min-h-screen px-5 mb-10 px-6">
                 <main>
                     <div className="grid grid-cols-1 md:grid-cols-2 py-10 m-6 gap-8 w-full">
@@ -118,7 +91,7 @@ export default async function Projects() {
                     </div>
                 </main>
             </div>
-            <Footer/>
+            <Footer />
         </>
     );
 }
